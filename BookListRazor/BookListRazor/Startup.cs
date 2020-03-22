@@ -26,9 +26,6 @@ namespace BookListRazor
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-			
-			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-				services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
