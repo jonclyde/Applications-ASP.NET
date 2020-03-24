@@ -30,6 +30,9 @@ namespace Spice
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
+
+			services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
 			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
