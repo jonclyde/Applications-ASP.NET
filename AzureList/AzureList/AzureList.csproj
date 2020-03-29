@@ -5,6 +5,15 @@
     <UserSecretsId>aspnet-AzureList-072AEE81-C102-4F71-9F97-7949471652DE</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200329173833_UpdateResourceType.cs" />
+    <Compile Remove="Data\Migrations\20200329173833_UpdateResourceType.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200329174909_UpdateResourceType2.cs" />
+    <Compile Remove="Data\Migrations\20200329174909_UpdateResourceType2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200329174959_updateresourcetypemodel.cs" />
+    <Compile Remove="Data\Migrations\20200329174959_updateresourcetypemodel.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />

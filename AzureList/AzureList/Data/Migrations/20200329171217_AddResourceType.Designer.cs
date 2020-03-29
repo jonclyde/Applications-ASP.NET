@@ -4,14 +4,16 @@ using AzureList.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AzureList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200329171217_AddResourceType")]
+    partial class AddResourceType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,15 +69,10 @@ namespace AzureList.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ResourceCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ResourceProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResourceCategoryId");
 
                     b.HasIndex("ResourceProviderId");
 
@@ -294,12 +291,6 @@ namespace AzureList.Data.Migrations
             modelBuilder.Entity("AzureList.Models.ViewModels.ResourceType", b =>
                 {
                     b.HasOne("AzureList.Models.ResourceCategory", "ResourceCategory")
-                        .WithMany()
-                        .HasForeignKey("ResourceCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AzureList.Models.ResourceProvider", "ResourceProvider")
                         .WithMany()
                         .HasForeignKey("ResourceProviderId")
                         .OnDelete(DeleteBehavior.Cascade)

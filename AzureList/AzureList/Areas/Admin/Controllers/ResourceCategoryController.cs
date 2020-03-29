@@ -19,7 +19,7 @@ namespace AzureList.Areas.Admin.Controllers
             _db = db;
         }
 
-        //GET
+        //GET INDEX
         public async Task<IActionResult> Index()
         {
             return View(await _db.ResourceCategory.ToListAsync());
@@ -45,6 +45,66 @@ namespace AzureList.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(ResourceCategory);
+        }
+
+        //GET - EDIT
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id==null)
+            {
+                return NotFound();
+            }
+            var ResourceCategory = await _db.ResourceCategory.FindAsync(id);
+            if(ResourceCategory == null)
+            {
+                return NotFound();
+            }
+            return View(ResourceCategory);
+        }
+
+        //POST - EDIT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ResourceCategory ResourceCategory)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Update(ResourceCategory);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(ResourceCategory);
+        }
+
+        //GET - DELETE
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id==null)
+            {
+                return NotFound();
+            }
+            var ResourceCategory = await _db.ResourceCategory.FindAsync(id);
+            if(ResourceCategory == null)
+            {
+                return NotFound();
+            }
+            return View(ResourceCategory);
+        }
+
+        //POST - DELETE
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var ResourceCategory = await _db.ResourceCategory.FindAsync(id);
+
+            if(ResourceCategory==null)
+            {
+                return View();
+            }
+            _db.ResourceCategory.Remove(ResourceCategory);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

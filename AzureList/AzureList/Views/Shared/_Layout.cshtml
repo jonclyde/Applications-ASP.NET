@@ -22,12 +22,12 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown text-white-50">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content Management
+                                Microsoft Azure
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
                                 <a class="dropdown-item" asp-action="Index" asp-controller="ResourceCategory" asp-area="Admin">Resource Category</a>
-                                <a class="dropdown-item">Resource Providers</a>
-                                <a class="dropdown-item">Resource Type</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="ResourceProvider" asp-area="Admin">Resource Providers</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="ResourceType" asp-area="Admin">Resource Type</a>
                             </div>
                         </li>
                         <li class="nav-item">

@@ -4,14 +4,16 @@ using AzureList.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AzureList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200329124635_AddResourceProvider")]
+    partial class AddResourceProvider
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,32 +56,6 @@ namespace AzureList.Data.Migrations
                     b.HasIndex("ResourceCategoryId");
 
                     b.ToTable("ResourceProvider");
-                });
-
-            modelBuilder.Entity("AzureList.Models.ViewModels.ResourceType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ResourceCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResourceProviderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResourceCategoryId");
-
-                    b.HasIndex("ResourceProviderId");
-
-                    b.ToTable("ResourceType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -287,21 +263,6 @@ namespace AzureList.Data.Migrations
                     b.HasOne("AzureList.Models.ResourceCategory", "ResourceCategory")
                         .WithMany()
                         .HasForeignKey("ResourceCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AzureList.Models.ViewModels.ResourceType", b =>
-                {
-                    b.HasOne("AzureList.Models.ResourceCategory", "ResourceCategory")
-                        .WithMany()
-                        .HasForeignKey("ResourceCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AzureList.Models.ResourceProvider", "ResourceProvider")
-                        .WithMany()
-                        .HasForeignKey("ResourceProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

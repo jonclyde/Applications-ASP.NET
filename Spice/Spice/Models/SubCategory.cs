@@ -23,6 +23,5 @@ namespace Spice.Models
 		[ForeignKey("CategoryId")]
 		public virtual Category Category { get; set; }
 
-
 	}
 }
