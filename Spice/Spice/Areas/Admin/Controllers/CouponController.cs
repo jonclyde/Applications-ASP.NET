@@ -34,10 +34,10 @@ namespace Spice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Coupon coupons)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var files = HttpContext.Request.Form.Files;
-                if (files.Count > 0)
+                if (files.Count>0)
                 {
                     byte[] p1 = null;
                     using (var fs1 = files[0].OpenReadStream())
@@ -110,6 +110,54 @@ namespace Spice.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(coupons);
+        }
+
+        //GET - Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if(id==null)
+            {
+                return NotFound();
+            }
+
+            var coupon = await _db.Coupon
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if(coupon == null)
+            {
+                return NotFound();
+            }
+
+            return View(coupon);
+        }
+
+        //GET Delete Coupon
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id==null)
+            {
+                return NotFound();
+            }
+            var coupon = await _db.Coupon.SingleOrDefaultAsync(m => m.Id == id);
+
+            if(coupon==null)
+            {
+                return NotFound();
+            }
+
+            return View(coupon);
+        }
+
+        //POST Delete
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var coupons = await _db.Coupon.SingleOrDefaultAsync(m => m.Id == id);
+            _db.Coupon.Remove(coupons);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
