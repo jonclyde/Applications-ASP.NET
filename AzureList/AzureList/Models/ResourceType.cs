@@ -9,10 +9,8 @@ namespace AzureList.Models
 {
 	public class ResourceType
 	{
-		[Key]
 		public int Id { get; set; }
 
-		[Display(Name = "Resource Type Name")]
 		[Required]
 		public string Name { get; set; }
 
