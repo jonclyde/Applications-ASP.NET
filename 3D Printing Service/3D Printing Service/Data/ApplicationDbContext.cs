@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using _3D_Printing_Service.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,7 @@ namespace _3D_Printing_Service.Data
 			: base(options)
 		{
 		}
+
+		public DbSet<Category> Category { get; set; }
 	}
 }
