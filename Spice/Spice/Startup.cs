@@ -38,9 +38,14 @@ namespace Spice
 				.AddDefaultTokenProviders()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
+			services.AddScoped<IDbInitializer, DbInitializer>();
+
 			services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
+			services.Configure<EmailOptions>(Configuration);
 			services.AddSingleton<IEmailSender, EmailSender>();
+			services.Configure<EmailOptions>(Configuration);
+
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
 			services.ConfigureApplicationCookie(options =>
@@ -60,7 +65,7 @@ namespace Spice
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
 		{
 			if (env.IsDevelopment())
 			{
@@ -78,6 +83,7 @@ namespace Spice
 
 			app.UseRouting();
 			StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+			dbInitializer.Initialize();
 			app.UseAuthentication();
 			app.UseAuthorization();
 			app.UseSession();
