@@ -9,6 +9,7 @@ using _3D_Printing_Service.Models;
 
 namespace _3D_Printing_Service.Controllers
 {
+	[Area("Customer")]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
