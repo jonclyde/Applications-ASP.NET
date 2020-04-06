@@ -6,22 +6,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using _3D_Printing_Service.Models;
+using _3D_Printing_Service.Data;
+using _3D_Printing_Service.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace _3D_Printing_Service.Controllers
 {
 	[Area("Customer")]
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
+		private readonly ApplicationDbContext _db;
+
+		public HomeController(ApplicationDbContext db)
 		{
-			_logger = logger;
+			_db = db;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			IndexViewModel IndexVM = new IndexViewModel()
+			{
+				Product = await _db.Product.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
+				Category = await _db.Category.ToListAsync()
+			};
+
+			return View(IndexVM);
 		}
 
 		public IActionResult Privacy()
