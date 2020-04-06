@@ -24,7 +24,7 @@
                     <label asp-for="MenuItem.Description" class="custom-label"></label>
                 </div>
                 <div class="col-8">
-                    @Html.TextAreaFor(m => m.MenuItem.Description)
+                    @Html.TextAreaFor(m => m.MenuItem.Description, new { style = "width:100%", @id = "ElementId" })
                 </div>
             </div>
             <div class="form-group row">
