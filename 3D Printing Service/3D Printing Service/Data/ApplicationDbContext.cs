@@ -16,5 +16,6 @@ namespace _3D_Printing_Service.Data
 
 		public DbSet<Category> Category { get; set; }
 		public DbSet<SubCategory> SubCategory { get; set; }
+		public DbSet<Product> Product { get; set; }
 	}
 }
