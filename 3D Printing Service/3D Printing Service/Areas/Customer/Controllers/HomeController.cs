@@ -9,6 +9,7 @@ using _3D_Printing_Service.Models;
 using _3D_Printing_Service.Data;
 using _3D_Printing_Service.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _3D_Printing_Service.Controllers
 {

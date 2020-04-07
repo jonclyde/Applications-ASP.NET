@@ -30,10 +30,23 @@ namespace _3D_Printing_Service
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.LoginPath = $"/Identity/Account/Login";
+				options.LogoutPath = $"/Identity/Account/Logout";
+				options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+			});
+			services.AddSession(options =>
+			{
+				options.Cookie.IsEssential = true;
+				options.IdleTimeout = TimeSpan.FromMinutes(30);
+				options.Cookie.HttpOnly = true;
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

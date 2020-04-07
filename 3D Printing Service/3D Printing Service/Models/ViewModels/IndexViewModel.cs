@@ -9,6 +9,6 @@ namespace _3D_Printing_Service.Models.ViewModels
 	{
 		public IEnumerable<Product> Product { get; set; }
 		public IEnumerable<Category> Category { get; set; }
-
+		public IEnumerable<Discount> Discount { get; set; }
 	}
 }
