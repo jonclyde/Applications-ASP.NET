@@ -12,6 +12,8 @@ using _3D_Printing_Service.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using _3D_Printing_Service.Services;
 
 namespace _3D_Printing_Service
 {
@@ -30,8 +32,11 @@ namespace _3D_Printing_Service
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>()
+			services.AddIdentity<IdentityUser,IdentityRole>()
+				.AddDefaultTokenProviders()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			services.AddSingleton<IEmailSender, EmailSender>();
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
 			services.ConfigureApplicationCookie(options =>

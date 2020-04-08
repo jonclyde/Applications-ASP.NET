@@ -10,6 +10,7 @@ namespace _3D_Printing_Service.Utility
 		public const string DefaultProductImage = "3dlogo.png";
 		public const string ManagerUser = "Manager";
 		public const string PrinterUser = "Printer";
+		public const string FrontDeskUser = "FrontDesk";
 		public const string CustomerEndUser = "Customer";
 	}
 }

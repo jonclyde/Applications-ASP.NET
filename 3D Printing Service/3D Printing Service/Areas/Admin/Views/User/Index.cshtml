@@ -23,28 +23,33 @@
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th>
-                        @Html.DisplayNameFor(m => m.Name)
+                        @Html.DisplayNameFor(m => m.FirstName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.Email)
+                        @Html.DisplayNameFor(m => m.LastName)
                     </th>
                     <th>
                         @Html.DisplayNameFor(m => m.PhoneNumber)
                     </th>
-                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Email)
+                    </th>
                     <th></th>
                 </tr>
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(m => item.Name)
+                            @Html.DisplayFor(m => item.FirstName)
                         </td>
                         <td>
-                            @Html.DisplayFor(m => item.Email)
+                            @Html.DisplayFor(m => item.LastName)
                         </td>
                         <td>
                             @Html.DisplayFor(m => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Email)
                         </td>
                         <td>
                             @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
