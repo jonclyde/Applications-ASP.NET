@@ -1,4 +1,4 @@
-﻿@model Spice.Models.ShoppingCart
+﻿@model _3D_Printing_Service.Models.ShoppingCart
 @using _3D_Printing_Service.Extensions
 @{
     ViewData["Title"] = "Details";
@@ -83,7 +83,7 @@
             <img src="@Model.Product.Image" width="100%" style="border-radius:5px;border: 1px solid #bbb9b9;" />
         </div>
     </div>
-    <input asp-for="Product" hidden />
+    <input asp-for="ProductId" hidden />
 </form>
 
 @section Scripts{

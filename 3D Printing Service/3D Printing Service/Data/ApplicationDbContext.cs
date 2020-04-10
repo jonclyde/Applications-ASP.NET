@@ -19,5 +19,8 @@ namespace _3D_Printing_Service.Data
 		public DbSet<Product> Product { get; set; }
 		public DbSet<Discount> Discount { get; set; }
 		public DbSet<ApplicationUser> ApplicationUser { get; set; }
+		public DbSet<ShoppingCart> ShoppingCart { get; set; }
+		public DbSet<OrderHeader> OrderHeader { get; set; }
+		public DbSet<OrderDetails> OrderDetails { get; set; }
 	}
 }

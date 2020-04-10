@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using _3D_Printing_Service.Services;
+using _3D_Printing_Service.Utility;
+using Stripe;
 
 namespace _3D_Printing_Service
 {
@@ -36,6 +38,7 @@ namespace _3D_Printing_Service
 				.AddDefaultTokenProviders()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
+			services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 			services.AddSingleton<IEmailSender, EmailSender>();
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -72,7 +75,8 @@ namespace _3D_Printing_Service
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+			StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+			app.UseSession();
 			app.UseAuthentication();
 			app.UseAuthorization();
 
