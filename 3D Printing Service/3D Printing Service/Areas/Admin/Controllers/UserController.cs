@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _3D_Printing_Service.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.ManagerUser)]
     [Area("Admin")]
     public class UserController : Controller
     {
