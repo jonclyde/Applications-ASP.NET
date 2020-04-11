@@ -29,13 +29,13 @@ namespace _3D_Printing_Service.Models
 		[Display(Name ="Order Total")]
 		public double OrderTotal { get; set; }
 
-		[Required]
-		[Display(Name ="Pickup Time")]
-		public DateTime PickUpTime { get; set; }
+		//[Required]
+		//[Display(Name ="Pickup Time")]
+		//public DateTime PickUpTime { get; set; }
 
-		[Required]
-		[NotMapped]
-		public DateTime PickUpDate { get; set; }
+		//[Required]
+		//[NotMapped]
+		//public DateTime PickUpDate { get; set; }
 
 		[Display(Name ="Discount Code")]
 		public string DiscountCode { get; set; }

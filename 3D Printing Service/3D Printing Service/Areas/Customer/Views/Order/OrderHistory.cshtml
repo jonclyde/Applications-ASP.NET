@@ -32,10 +32,9 @@
                         @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.ApplicationUser.Email)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickUpTime)
+                        @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.OrderTotal)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.OrderTotal)
                     </th>
                     <th>
                         Total Items
@@ -57,13 +56,12 @@
                             @Html.DisplayFor(m => item.OrderHeader.ApplicationUser.Email)
                         </td>
                         <td>
-                            @Html.DisplayFor(m => item.OrderHeader.PickUpTime)
-                        </td>
-                        <td>
                             @Html.DisplayFor(m => item.OrderHeader.OrderTotal)
                         </td>
                         <td>
                             @Html.DisplayFor(m => item.OrderDetails.Count)
+                        </td>
+                        <td>
                         </td>
                         <td>
                             <button type="submit" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">

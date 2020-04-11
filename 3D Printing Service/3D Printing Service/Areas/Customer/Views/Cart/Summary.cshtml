@@ -50,22 +50,6 @@
                                 </div>
                                 <div class="row my-1">
                                     <div class="col-3">
-                                        <label>Date</label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input asp-for="@Model.OrderHeader.PickUpDate" id="datepicker" value="" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-3">
-                                        <label>Time</label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input asp-for="@Model.OrderHeader.PickUpTime" id="timepicker" value="" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-3">
                                         <label>Additional instructions:</label>
                                     </div>
                                     <div class="col-9">
@@ -144,9 +128,4 @@
     }
 </form>
 
-@section Scripts{
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
-
-}
 

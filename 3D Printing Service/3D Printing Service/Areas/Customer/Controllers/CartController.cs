@@ -95,7 +95,7 @@ namespace _3D_Printing_Service.Areas.Customer.Controllers
 
             detailCart.OrderHeader.PickupName = applicationUser.FirstName;
             detailCart.OrderHeader.PhoneNumber = applicationUser.PhoneNumber;
-            detailCart.OrderHeader.PickUpTime = DateTime.Now;
+            //detailCart.OrderHeader.PickUpTime = DateTime.Now;
 
             if(HttpContext.Session.GetString(SD.ssDiscountCode) != null)
             {

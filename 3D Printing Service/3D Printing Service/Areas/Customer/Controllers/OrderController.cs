@@ -90,8 +90,7 @@ namespace _3D_Printing_Service.Areas.Customer.Controllers
 		{
 			List<OrderDetailsViewModel> orderDetailsVM = new List<OrderDetailsViewModel>();
 			List<OrderHeader> OrderHeaderList = await _db.OrderHeader
-				.Where(o => o.Status == SD.StatusSubmitted || o.Status == SD.StatusInProcess)
-				.OrderByDescending(u => u.PickUpTime).ToListAsync();
+				.Where(o => o.Status == SD.StatusSubmitted || o.Status == SD.StatusInProcess).ToListAsync();
 
 			foreach (OrderHeader item in OrderHeaderList)
 			{
@@ -102,7 +101,7 @@ namespace _3D_Printing_Service.Areas.Customer.Controllers
 				};
 				orderDetailsVM.Add(individual);
 			}
-			return View(orderDetailsVM.OrderBy(o => o.OrderHeader.PickUpTime).ToList());
+			return View(orderDetailsVM.OrderBy(o => o.OrderHeader.OrderDate).ToList());
 		}
 
 		public async Task<IActionResult> GetOrderDetails(int Id)

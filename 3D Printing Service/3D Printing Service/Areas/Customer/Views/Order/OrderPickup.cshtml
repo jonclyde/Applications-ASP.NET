@@ -50,10 +50,10 @@
                             @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.ApplicationUser.Email)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickUpTime)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.OrderTotal)
+                        </th>
+
+                             <th>
                         </th>
                         <th>
                             Total Items
@@ -64,31 +64,30 @@
                     </tr>
                     @foreach (var item in Model.Orders)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderHeader.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderHeader.PickupName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderHeader.ApplicationUser.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderHeader.PickUpTime)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderHeader.OrderTotal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.OrderDetails.Count)
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
-                                    <i class="far fa-list-alt"></i> Details
-                                </button>
-                            </td>
-                        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.OrderHeader.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.OrderHeader.PickupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.OrderHeader.ApplicationUser.Email)
+                    </td>
+                        @Html.DisplayFor(m => item.OrderHeader.OrderTotal)
+                    <td>
+                        @Html.DisplayFor(m => item.OrderDetails.Count)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                            <i class="far fa-list-alt"></i> Details
+                        </button>
+                    </td>
+                </tr>
                     }
                 </table>
                 <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn border"
