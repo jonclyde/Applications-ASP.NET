@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using organisation.Data;
 
 namespace organisation.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200413181120_CreateNewDB")]
+    partial class CreateNewDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,15 +246,15 @@ namespace organisation.Data.Migrations
                     b.Property<int>("Importance")
                         .HasColumnType("int");
 
+                    b.Property<int>("LeaveTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
-
-                    b.Property<int>("TaskTypeId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Urgency")
                         .HasColumnType("int");
@@ -262,7 +264,7 @@ namespace organisation.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TaskTypeId");
+                    b.HasIndex("LeaveTypeId");
 
                     b.HasIndex("UserId");
 
@@ -343,7 +345,7 @@ namespace organisation.Data.Migrations
                 {
                     b.HasOne("organisation.Data.TaskType", "TaskType")
                         .WithMany()
-                        .HasForeignKey("TaskTypeId")
+                        .HasForeignKey("LeaveTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

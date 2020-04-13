@@ -54,10 +54,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @*@if (SignInManager.IsSignedIn(User))
                             {*@
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                <i class="nav-icon fas fa-home"></i>
+                            <a asp-area="" asp-controller="Tasks" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    Logged in Link 1
+                                    Tasks
                                 </p>
                             </a>
                         </li>

@@ -13,6 +13,7 @@ namespace organisation.Mappings
 		public Maps()
 		{
 			CreateMap<TaskType, TaskTypeVM>().ReverseMap();
+			CreateMap<OrgTask, OrgTaskVM>().ReverseMap();
 		}
 	}
 }

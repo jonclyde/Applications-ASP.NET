@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using organisation.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace organisation.Data
+namespace organisation.Models
 {
-	public class OrgTask
+	public class OrgTaskVM
 	{
 		[Key]
 		public int Id { get; set; }
@@ -22,12 +22,10 @@ namespace organisation.Data
 		public DateTime DateCreated { get; set; }
 		public DateTime EndDate { get; set; }
 		public DateTime DeadLine { get; set; }
-		[ForeignKey("UserId")]
 		public IdentityUser User { get; set; }
 		public string UserId { get; set; }
 		public bool? Status { get; set; }
 		public DateTime DateComplete { get; set; }
-		[ForeignKey("TaskTypeId")]
 		public TaskType TaskType { get; set; }
 		public int TaskTypeId { get; set; }
 	}
