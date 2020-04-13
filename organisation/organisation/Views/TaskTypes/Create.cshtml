@@ -1,0 +1,46 @@
+﻿@model organisation.Models.TaskTypeVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Task Type</h1>
+
+<hr />
+<form method="post" asp-action="Create">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Name" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_CreateAndBackToListButton" />
+            </div>
+        </div>
+    </div>
+</form>
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary btn-block" />
+    </div>
+</form>*@
+@*<div>
+    <a asp-action="Index" type="button" class="btn btn-outline-secondary">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
