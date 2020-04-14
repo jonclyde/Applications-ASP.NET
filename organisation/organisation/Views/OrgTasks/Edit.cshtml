@@ -1,0 +1,53 @@
+﻿@model organisation.Models.UpsertOrgTaskVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Task</h1>
+
+<hr />
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="OrgTask.Id" />
+            <div class="form-group">
+                <label asp-for="OrgTask.TaskTypeId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.OrgTask.TaskTypeId, new SelectList(Model.TaskTypes, "Value", "Text"), "Select Task Type", new { @class = "form-control" })
+                <span asp-validation-for="OrgTask.TaskTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrgTask.Name" class="control-label"></label>
+                <input asp-for="OrgTask.Name" class="form-control" />
+                <span asp-validation-for="OrgTask.Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="OrgTask.Importance" class="control-label"></label>
+                <input asp-for="OrgTask.Importance" class="form-control" />
+                <span asp-validation-for="OrgTask.Importance" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="OrgTask.Difficulty" class="control-label"></label>
+                <input asp-for="OrgTask.Difficulty" class="form-control" />
+                <span asp-validation-for="OrgTask.Difficulty" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="form-group">
+                <label asp-for="OrgTask.EndDate" class="control-label"></label>
+                <input asp-for="OrgTask.EndDate" class="form-control" />
+                <span asp-validation-for="OrgTask.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrgTask.DeadLine" class="control-label"></label>
+                <input asp-for="OrgTask.DeadLine" class="form-control" />
+                <span asp-validation-for="OrgTask.DeadLine" class="text-danger"></span>
+            </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-5">
+            <partial name="_EditAndBackToListButton" model="Model.OrgTask.Id" />
+        </div>
+    </div>
+</form>

@@ -17,44 +17,54 @@ namespace organisation.Repository
 			_db = db;
 		}
 
-		public Task<bool> Create(OrgTask entity)
+		public async Task<bool> Create(OrgTask entity)
+		{
+			await _db.OrgTasks.AddAsync(entity);
+			return await Save();
+
+		}
+
+		public async Task<bool> Delete(OrgTask entity)
+		{
+			_db.OrgTasks.Remove(entity);
+			return await Save();
+		}
+
+		public async Task<ICollection<OrgTask>> FindAll()
+		{
+			var orgTasks = await _db.OrgTasks
+				.ToListAsync();
+			return orgTasks;
+		}
+
+		public async Task<OrgTask> FindById(int id)
+		{
+			var orgTasks = await _db.OrgTasks
+				.FirstOrDefaultAsync(q => q.Id == id);
+			return orgTasks;
+		}
+
+		public async Task<ICollection<OrgTask>> GetTasksByTaskType(int taskid)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<bool> Delete(OrgTask entity)
+		public async Task<bool> isExists(int id)
 		{
-			throw new NotImplementedException();
+			var exists = await _db.OrgTasks.AnyAsync(q => q.Id == id);
+			return exists;
 		}
 
-		public Task<ICollection<OrgTask>> FindAll()
+		public async Task<bool> Save()
 		{
-			throw new NotImplementedException();
+			var changes = await _db.SaveChangesAsync();
+			return changes > 0;
 		}
 
-		public Task<OrgTask> FindById(int id)
+		public async Task<bool> Update(OrgTask entity)
 		{
-			throw new NotImplementedException();
-		}
-
-		public Task<ICollection<OrgTask>> GetTasksByTaskType(int taskid)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<bool> isExists(int id)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<bool> Save()
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<bool> Update(OrgTask entity)
-		{
-			throw new NotImplementedException();
+			_db.OrgTasks.Update(entity);
+			return await Save();
 		}
 	}
 }

@@ -10,8 +10,8 @@ using organisation.Data;
 namespace organisation.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200413181620_RenameTasksTable")]
-    partial class RenameTasksTable
+    [Migration("20200414142730_changetaskscoretodouble")]
+    partial class changetaskscoretodouble
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,6 +250,9 @@ namespace organisation.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
 
@@ -268,7 +271,7 @@ namespace organisation.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("OrgTasks");
                 });
 
             modelBuilder.Entity("organisation.Data.TaskType", b =>

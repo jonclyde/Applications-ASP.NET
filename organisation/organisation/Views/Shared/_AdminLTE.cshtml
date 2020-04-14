@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>@ViewData["Title"] - Train Management</title>
+    <title>@ViewData["Title"] - Personal Organisation</title>
 
     <link rel="stylesheet" href="~/css/all.min.css">
     <link rel="stylesheet" href="~/css/adminlte.min.css">
@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @*@if (SignInManager.IsSignedIn(User))
                             {*@
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="Tasks" asp-action="Index" class="nav-link">
+                            <a asp-area="" asp-controller="OrgTasks" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
                                     Tasks

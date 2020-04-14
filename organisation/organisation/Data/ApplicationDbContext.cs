@@ -13,7 +13,7 @@ namespace organisation.Data
 		{
 		}
 
-		public DbSet<OrgTask> Tasks { get; set; }
+		public DbSet<OrgTask> OrgTasks { get; set; }
 		public DbSet<TaskType> TaskTypes { get; set; }
 	}
 }

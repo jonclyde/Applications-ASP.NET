@@ -1,0 +1,146 @@
+﻿@model AdminOrgTasksVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tasks</h1>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fa fa-list"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.TotalTasks</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalTasks)</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="info-box">
+            <span class="info-box-icon bg-danger"><i class="fas fa-exclamation"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.Q1Tasks</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.Q1Tasks)</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="info-box">
+            <span class="info-box-icon bg-success"><i class="fas fa-chart-line"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.Q2Tasks</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.Q2Tasks)</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="info-box">
+            <span class="info-box-icon bg-warning"><i class="fas fa-phone-volume"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.Q3Tasks</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.Q3Tasks)</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="info-box">
+            <span class="info-box-icon bg-gray"><i class="fas fa-couch"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.Q4Tasks</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.Q4Tasks)</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="info-box bg-info">
+            <partial name="_CreateButtonPartial" />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<hr />
+
+<h1>Tasks</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Urgency
+                </th>
+                <th>
+                    Importance
+                </th>
+                <th>
+                    Difficulty
+                </th>
+                <th>
+                    Score
+                </th>
+
+                <th>
+                    End Date
+                </th>
+                <th>
+                    Deadline
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrgTasks)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Urgency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Importance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Difficulty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeadLine)
+                    </td>
+                    <td>
+                        @if (item.Status == false || item.Status == null)
+                        {
+                            <span class="badge badge-warning">Pending</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-success">Complete</span>
+                        }
+                    </td>
+                    <td>
+                        <partial name="_ActionsButtons" model="item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

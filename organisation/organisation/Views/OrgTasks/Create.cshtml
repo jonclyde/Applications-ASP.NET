@@ -1,0 +1,57 @@
+﻿@model organisation.Models.UpsertOrgTaskVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Task</h1>
+
+<hr />
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TaskTypeId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.TaskTypeId, new SelectList(Model.TaskTypes, "Value", "Text"), "Select Task Type", new { @class = "form-control" })
+                <span asp-validation-for="TaskTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Urgency" class="control-label"></label>
+                <input asp-for="Urgency" class="form-control" />
+                <span asp-validation-for="Urgency" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Importance" class="control-label"></label>
+                <input asp-for="Importance" class="form-control" />
+                <span asp-validation-for="Importance" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Difficulty" class="control-label"></label>
+                <input asp-for="Difficulty" class="form-control" />
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeadLine" class="control-label"></label>
+                <input asp-for="DeadLine" class="form-control" />
+                <span asp-validation-for="DeadLine" class="text-danger"></span>
+            </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-5">
+            <partial name="_CreateAndBackToListButton" />
+        </div>
+    </div>
+</form>
