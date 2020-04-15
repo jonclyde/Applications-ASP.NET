@@ -17,5 +17,8 @@ namespace organisation.Data
 		public DbSet<TaskType> TaskTypes { get; set; }
 
 		public DbSet<OrgGoal> OrgGoals { get; set; }
+		public DbSet<RunthroughTaskSection> RunthroughTaskSections { get; set; }
+		public DbSet<RunthroughTaskStatus> RunthroughTaskStatuses { get; set; }
+		public DbSet<RunthroughTaskType> RunthroughTaskTypes { get; set; }
 	}
 }

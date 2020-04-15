@@ -321,5 +321,36 @@ namespace organisation.Controllers
                 return View();
             }
         }
+
+        public async Task<IActionResult> CompleteTask(int id)
+        {
+            var orgTask = await _orgTaskRepo.FindById(id);
+            if(orgTask == null)
+            {
+                return NotFound();
+            }
+
+            orgTask.Status = true;
+
+            await _orgTaskRepo.Update(orgTask);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> IncompleteTask(int id)
+        {
+            var orgTask = await _orgTaskRepo.FindById(id);
+
+            if(orgTask == null)
+            {
+                return NotFound();
+            }
+
+            orgTask.Status = false;
+
+            await _orgTaskRepo.Update(orgTask);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -130,11 +130,15 @@
                     <td>
                         @if (item.Status == false || item.Status == null)
                         {
-                            <span class="badge badge-warning">Pending</span>
+                            <a asp-action="CompleteTask" asp-route-id="@item.Id" class="badge badge-warning">
+                                Pending
+                            </a>
                         }
                         else
                         {
-                            <span class="badge badge-success">Complete</span>
+                            <a asp-action="IncompleteTask" asp-route-id="@item.Id" class="badge badge-success">
+                                Complete
+                            </a>
                         }
                     </td>
                     <td>
