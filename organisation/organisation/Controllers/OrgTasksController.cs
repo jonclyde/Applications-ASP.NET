@@ -58,7 +58,7 @@ namespace organisation.Controllers
                 Text = q.Name,
                 Value = q.Id.ToString()
             });
-            var model = new UpsertOrgTaskVM
+            var model = new CreateOrgTaskVM
             {
                 TaskTypes = taskTypeItems
             };
@@ -68,7 +68,7 @@ namespace organisation.Controllers
         // POST: OrgTasks/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UpsertOrgTaskVM model)
+        public async Task<ActionResult> Create(CreateOrgTaskVM model)
         {
             try
             {
@@ -177,27 +177,28 @@ namespace organisation.Controllers
                 return NotFound();
             }
             
-            var taskTypes = await _taskTypeRepo.FindAll();
             var orgTask = await _orgTaskRepo.FindById(id);
+            var taskTypes = await _taskTypeRepo.FindAll();
 
             var taskTypeItems = taskTypes.Select(q => new SelectListItem
             {
                 Text = q.Name,
                 Value = q.Id.ToString()
             });
-            var model = new UpsertOrgTaskVM
+            var model = new EditOrgTaskVM
             {
                 OrgTask = orgTask,
                 TaskTypes = taskTypeItems
             };
-                        
+
+            // var mapOrgTask = _mapper.Map<OrgTask>(model);
             return View(model);
         }
 
         // POST: OrgTasks/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(UpsertOrgTaskVM model)
+        public async Task<ActionResult> Edit(EditOrgTaskVM model)
         {
             try
             {
@@ -205,18 +206,81 @@ namespace organisation.Controllers
                 {
                     return View(model);
                 }
+                var endDate = model.OrgTask.EndDate;
+                var deadLine = model.OrgTask.DeadLine;
+                var urgency = model.OrgTask.Urgency;
+                var importance = model.OrgTask.Importance;
+                var difficulty = model.OrgTask.Difficulty;
+                var taskTypes = await _taskTypeRepo.FindAll();
+                var taskTypeItems = taskTypes.Select(q => new SelectListItem
+                {
+                    Text = q.Name,
+                    Value = q.Id.ToString()
+                });
+                model.TaskTypes = taskTypeItems;
 
-                var orgTask = _mapper.Map<OrgTask>(model);
+                int quadrant;
+
+                if (importance == 1 && urgency == 1)
+                {
+                    quadrant = 1;
+                }
+                else
+                {
+                    if (importance == 1 && urgency == 2)
+                    {
+                        quadrant = 2;
+                    }
+                    else
+                    {
+                        if (importance == 2 && urgency == 1)
+                        {
+                            quadrant = 3;
+                        }
+                        else
+                        {
+                            if (importance == 2 && urgency == 2)
+                            {
+                                quadrant = 4;
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Urgency and importance must both be set to 1 or 2");
+                                return View(model);
+                            }
+                        }
+                    }
+                }
+
+                double precalc = quadrant / difficulty;
+                double score = precalc * 10;
+
+                var orgTaskModel = new OrgTaskVM
+                {
+                    Name = model.OrgTask.Name,
+                    Urgency = urgency,
+                    Importance = importance,
+                    Difficulty = difficulty,
+                    Score = score,
+                    DateCreated = DateTime.Now,
+                    EndDate = endDate,
+                    DeadLine = deadLine,
+                    Status = null,
+                    TaskTypeId = model.OrgTask.TaskTypeId,
+                    DateComplete = DateTime.Now
+                };
+
+                var orgTask = _mapper.Map<OrgTask>(orgTaskModel);
                 var isSuccess = await _orgTaskRepo.Update(orgTask);
-
-                if(!isSuccess)
+                           
+                if (!isSuccess)
                 {
                     ModelState.AddModelError("", "Something Went Wrong");
                     return View(model);
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
                 ModelState.AddModelError("", "Something Went Wrong...");
                 return View(model);
@@ -224,9 +288,21 @@ namespace organisation.Controllers
         }
 
         // GET: OrgTasks/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var orgTask = await _orgTaskRepo.FindById(id);
+            if(orgTask == null)
+            {
+                return NotFound();
+            }
+
+            var isSuccess = await _orgTaskRepo.Delete(orgTask);
+            if(!isSuccess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
+
         }
 
         // POST: OrgTasks/Delete/5

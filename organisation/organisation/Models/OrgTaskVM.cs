@@ -31,7 +31,7 @@ namespace organisation.Models
 
 	public class AdminOrgTasksVM
 	{
-		[Display(Name = "Total Number of Tasks")]
+		[Display(Name = "Total Tasks")]
 		public int TotalTasks { get; set; }
 		[Display(Name = "Quadrant 1")]
 		public int Q1Tasks { get; set; }
@@ -44,7 +44,7 @@ namespace organisation.Models
 		public List<OrgTaskVM> OrgTasks { get; set; }
 	}
 
-	public class UpsertOrgTaskVM
+	public class CreateOrgTaskVM
 	{
 		public OrgTask OrgTask { get; set; }
 		[Display(Name ="Task Name")]
@@ -61,6 +61,22 @@ namespace organisation.Models
 		public DateTime DeadLine { get; set; }
 		public IEnumerable<SelectListItem> TaskTypes { get; set; }
 		[Display(Name ="Task Type")]
+		public int TaskTypeId { get; set; }
+
+	}
+
+	public class EditOrgTaskVM
+	{
+		public OrgTask OrgTask { get; set; }
+		[Display(Name = "Task Name")]
+		public string Name { get; set; }
+		public int Difficulty { get; set; }
+		[Display(Name = "Target End Date")]
+		public DateTime EndDate { get; set; }
+		[Display(Name = "Deadline")]
+		public DateTime DeadLine { get; set; }
+		public IEnumerable<SelectListItem> TaskTypes { get; set; }
+		[Display(Name = "Task Type")]
 		public int TaskTypeId { get; set; }
 
 	}

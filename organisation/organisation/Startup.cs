@@ -36,6 +36,7 @@ namespace organisation
 					Configuration.GetConnectionString("DefaultConnection")));
 			services.AddScoped<ITaskTypeRepository, TaskTypeRepository>();
 			services.AddScoped<IOrgTaskRepository, OrgTaskRepository>();
+			services.AddScoped<IOrgGoalRepository, OrgGoalRepository>();
 			services.AddAutoMapper(typeof(Maps));
 			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();

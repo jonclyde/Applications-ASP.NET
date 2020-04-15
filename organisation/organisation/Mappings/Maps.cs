@@ -14,7 +14,9 @@ namespace organisation.Mappings
 		{
 			CreateMap<TaskType, TaskTypeVM>().ReverseMap();
 			CreateMap<OrgTask, OrgTaskVM>().ReverseMap();
-			CreateMap<OrgTask, UpsertOrgTaskVM>().ReverseMap();
+			CreateMap<OrgTask, CreateOrgTaskVM>().ReverseMap();
+			CreateMap<OrgTask, EditOrgTaskVM>().ReverseMap();
+			CreateMap<OrgGoal, OrgGoalVM>().ReverseMap();
 		}
 	}
 }

@@ -15,5 +15,7 @@ namespace organisation.Data
 
 		public DbSet<OrgTask> OrgTasks { get; set; }
 		public DbSet<TaskType> TaskTypes { get; set; }
+
+		public DbSet<OrgGoal> OrgGoals { get; set; }
 	}
 }
