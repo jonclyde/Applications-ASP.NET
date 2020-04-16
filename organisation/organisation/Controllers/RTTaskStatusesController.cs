@@ -8,78 +8,75 @@ using Microsoft.AspNetCore.Mvc;
 using organisation.Contracts;
 using organisation.Data;
 using organisation.Models;
-using organisation.Repository;
 
 namespace organisation.Controllers
 {
-   
-    public class RTTaskSectionsController : Controller
+    public class RTTaskStatusesController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly IRunthroughTaskSection _rtTaskSectionRepo;
+        private readonly IRunthroughTaskStatus _rtTaskStatusRepo;
         private readonly IMapper _mapper;
 
-        public RTTaskSectionsController (ApplicationDbContext db, IRunthroughTaskSection rtTaskSectionRepo, IMapper mapper)
+        public RTTaskStatusesController(ApplicationDbContext db, IRunthroughTaskStatus rtTaskStatusRepo, IMapper mapper)
         {
             _db = db;
-            _rtTaskSectionRepo = rtTaskSectionRepo;
+            _rtTaskStatusRepo = rtTaskStatusRepo;
             _mapper = mapper;
         }
 
-
-        // GET: RTTaskSections
+        // GET: RTTaskStatuses
         public async Task<ActionResult> Index()
         {
-            var rtTaskSections = await _rtTaskSectionRepo.FindAll();
-            var model = _mapper.Map<List<RunthroughTaskSection>, List<RunthroughTaskSectionVM>>(rtTaskSections.ToList());
+            var rtTaskStatuses = await _rtTaskStatusRepo.FindAll();
+            var model = _mapper.Map<List<RunthroughTaskStatus>, List<RunthroughTaskStatusVM>>(rtTaskStatuses.ToList());
+
             return View(model);
         }
 
-
-        // GET: RTTaskSections/Detail
+        // GET: RTTaskStatuses/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var isExists = await _rtTaskSectionRepo.isExists(id);
-            if(!isExists)
+            var rtTaskStatus = await _rtTaskStatusRepo.FindById(id);
+
+            if(rtTaskStatus == null)
             {
                 return NotFound();
             }
-            var rtTaskSection = await _rtTaskSectionRepo.FindById(id);
 
-            var model = _mapper.Map<RunthroughTaskSectionVM>(rtTaskSection);
+            var model = _mapper.Map<RunthroughTaskStatusVM>(rtTaskStatus);
 
             return View(model);
-
         }
 
-        // GET: RTTaskSections/Create
+        // GET: RTTaskStatuses/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: RTTaskSections/Create
+        // POST: RTTaskStatuses/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RunthroughTaskSectionVM model)
+        public async Task<ActionResult> Create(RunthroughTaskStatusVM model)
         {
             try
             {
                 // TODO: Add insert logic here
                 if(!ModelState.IsValid)
                 {
-                    return View(model);
+                    ModelState.AddModelError("", "Mode state is not valid");
+                    return View();
                 }
 
-                var rtTaskSection = _mapper.Map<RunthroughTaskSection>(model);
-                rtTaskSection.DateCreated = DateTime.Now;
 
-                var isSuccess = await _rtTaskSectionRepo.Create(rtTaskSection);
+                var rtTaskStatus = _mapper.Map<RunthroughTaskStatus>(model);
+                rtTaskStatus.DateCreated = DateTime.Now;
+
+                var isSuccess = await _rtTaskStatusRepo.Create(rtTaskStatus);
 
                 if(!isSuccess)
                 {
-                    ModelState.AddModelError("", "Something went wrong adding the record to the database");
-                    return View(model);
+                    ModelState.AddModelError("", "Something went wrong adding the database record");
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -87,47 +84,46 @@ namespace organisation.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError("", "Try failed. Exception caught");
-                ModelState.AddModelError("", ex.InnerException.Message.ToString());
+                ModelState.AddModelError("", ex.Message.ToString());
                 return View();
             }
         }
 
-        // GET: RTTaskSections/Edit/5
+        // GET: RTTaskStatuses/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var isExists = await _rtTaskSectionRepo.isExists(id);
+            // TODO: Add update logic here
+            var isExists = await _rtTaskStatusRepo.isExists(id);
 
-            if(!isExists)
+            if (!isExists)
             {
                 return NotFound();
             }
 
-            var rtTaskSection = await _rtTaskSectionRepo.FindById(id);
-
-            var model = _mapper.Map<RunthroughTaskSectionVM>(rtTaskSection);
+            var rtTaskStatus = await _rtTaskStatusRepo.FindById(id);
+            var model = _mapper.Map<RunthroughTaskStatusVM>(rtTaskStatus);
 
             return View(model);
-
         }
 
-        // POST: RTTaskSections/Edit/5
+        // POST: RTTaskStatuses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(RunthroughTaskSectionVM model)
+        public async Task<ActionResult> Edit(RunthroughTaskStatusVM model)
         {
             try
             {
-                // TODO: Add update logic here
                 if(!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Model state is not valid");
-                    return View();
+                    return View(model);
                 }
 
-                var rtTaskSection = _mapper.Map<RunthroughTaskSection>(model);
-                var isSuccess = await _rtTaskSectionRepo.Update(rtTaskSection);
+                var rtTaskStatus = _mapper.Map<RunthroughTaskStatus>(model);
 
-                if (!isSuccess)
+                var isSuccess = await _rtTaskStatusRepo.Update(rtTaskStatus);
+
+                if(!isSuccess)
                 {
                     ModelState.AddModelError("", "Something went wrong updating the DB record");
                 }
@@ -142,26 +138,27 @@ namespace organisation.Controllers
             }
         }
 
-        // GET: RTTaskSections/Delete/5
+        // GET: RTTaskStatuses/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var rtTaskSection = await _rtTaskSectionRepo.FindById(id);
+            var rtTaskStatus = await _rtTaskStatusRepo.FindById(id);
 
-            if (rtTaskSection == null)
+            if(rtTaskStatus == null)
             {
                 return NotFound();
             }
 
-            var isSuccess = await _rtTaskSectionRepo.Delete(rtTaskSection);
+            var isSuccess = await _rtTaskStatusRepo.Delete(rtTaskStatus);
 
             if(!isSuccess)
             {
                 return BadRequest();
             }
+
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: RTTaskSections/Delete/5
+        // POST: RTTaskStatuses/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

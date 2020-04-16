@@ -282,7 +282,7 @@ namespace organisation.Controllers
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError("", "Something Went Wrong...");
+                ModelState.AddModelError("", ex.InnerException.Message.ToString());
                 return View(model);
             }
         }

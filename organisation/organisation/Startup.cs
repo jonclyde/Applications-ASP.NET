@@ -38,7 +38,7 @@ namespace organisation
 			services.AddScoped<IOrgTaskRepository, OrgTaskRepository>();
 			services.AddScoped<IOrgGoalRepository, OrgGoalRepository>();
 			services.AddScoped<IRunthroughTaskSection, RunthroughTaskSectionRepository>();
-			//services.AddScoped<IRunthroughTaskStatus, Runthrough>();
+			services.AddScoped<IRunthroughTaskStatus, RunthroughTaskStatusRepository>();
 			//services.AddScoped<IRunthroughTaskType, OrgGoalRepository>();
 			services.AddAutoMapper(typeof(Maps));
 			services.AddDefaultIdentity<IdentityUser>()

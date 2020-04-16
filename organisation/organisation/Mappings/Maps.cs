@@ -18,6 +18,7 @@ namespace organisation.Mappings
 			CreateMap<OrgTask, EditOrgTaskVM>().ReverseMap();
 			CreateMap<OrgGoal, OrgGoalVM>().ReverseMap();
 			CreateMap<RunthroughTaskSection, RunthroughTaskSectionVM>().ReverseMap();
+			CreateMap<RunthroughTaskStatus, RunthroughTaskStatusVM>().ReverseMap();
 		}
 	}
 }
