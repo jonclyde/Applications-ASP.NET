@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace organisation.Models
 {
-	public class RunthroughTaskStatusVM
+	public class RunthroughTaskTypeVM
 	{
 		public int Id { get; set; }
 		[Required]
-		[Display(Name="Task Status Name")]
+		[Display(Name="Task Type Name")]
 		public string Name { get; set; }
-		[Display(Name = "Date Created")]
+		[Display(Name="Date Created")]
 		public DateTime DateCreated { get; set; }
 	}
 }
