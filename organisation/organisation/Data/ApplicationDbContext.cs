@@ -20,5 +20,6 @@ namespace organisation.Data
 		public DbSet<RunthroughTaskSection> RunthroughTaskSections { get; set; }
 		public DbSet<RunthroughTaskStatus> RunthroughTaskStatuses { get; set; }
 		public DbSet<RunthroughTaskType> RunthroughTaskTypes { get; set; }
+		public DbSet<RunthroughHiscore> RunthroughHiscores { get; set; }
 	}
 }

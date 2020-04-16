@@ -40,6 +40,7 @@ namespace organisation
 			services.AddScoped<IRunthroughTaskSection, RunthroughTaskSectionRepository>();
 			services.AddScoped<IRunthroughTaskStatus, RunthroughTaskStatusRepository>();
 			services.AddScoped<IRunthroughTaskType, RunthroughTaskTypeRepository>();
+			services.AddScoped<IRunthroughHiscore, RunthroughHiscoreRepository>();
 			services.AddAutoMapper(typeof(Maps));
 			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();

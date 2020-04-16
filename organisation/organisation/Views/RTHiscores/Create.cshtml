@@ -1,0 +1,61 @@
+﻿@model organisation.Models.RunthroughHiscoreVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Runthrough Hiscore</h1>
+<hr />
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceManual" class="control-label"></label>
+                <input asp-for="ResourceManual" class="form-control" />
+                <span asp-validation-for="ResourceManual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceARMManual" class="control-label"></label>
+                <input asp-for="ResourceARMManual" class="form-control" />
+                <span asp-validation-for="ResourceARMManual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsv0_1" class="control-label"></label>
+                <input asp-for="ResourceDevOpsv0_1" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsv0_2" class="control-label"></label>
+                <input asp-for="ResourceDevOpsv0_2" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsv0_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsTotal" class="control-label"></label>
+                <input asp-for="ResourceDevOpsTotal" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceTotal" class="control-label"></label>
+                <input asp-for="ResourceTotal" class="form-control" />
+                <span asp-validation-for="ResourceTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTotal" class="control-label"></label>
+                <input asp-for="TaskTotal" class="form-control" />
+                <span asp-validation-for="TaskTotal" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-5">
+            <partial name="_CreateAndBackToListButton" />
+        </div>
+    </div>
+</form>

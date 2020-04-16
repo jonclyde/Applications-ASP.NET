@@ -1,0 +1,55 @@
+﻿@model organisation.Models.RunthroughHiscoreVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Runthrough Hiscore</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Date" />
+            <div class="form-group">
+                <label asp-for="ResourceManual" class="control-label"></label>
+                <input asp-for="ResourceManual" class="form-control" />
+                <span asp-validation-for="ResourceManual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceARMManual" class="control-label"></label>
+                <input asp-for="ResourceARMManual" class="form-control" />
+                <span asp-validation-for="ResourceARMManual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsv0_1" class="control-label"></label>
+                <input asp-for="ResourceDevOpsv0_1" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsv0_2" class="control-label"></label>
+                <input asp-for="ResourceDevOpsv0_2" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsv0_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceDevOpsTotal" class="control-label"></label>
+                <input asp-for="ResourceDevOpsTotal" class="form-control" />
+                <span asp-validation-for="ResourceDevOpsTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResourceTotal" class="control-label"></label>
+                <input asp-for="ResourceTotal" class="form-control" />
+                <span asp-validation-for="ResourceTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTotal" class="control-label"></label>
+                <input asp-for="TaskTotal" class="form-control" />
+                <span asp-validation-for="TaskTotal" class="text-danger"></span>
+            </div>
+            <partial name="_EditAndBackToListButton" model="@Model.Id" />
+        </form>
+    </div>
+</div>
+

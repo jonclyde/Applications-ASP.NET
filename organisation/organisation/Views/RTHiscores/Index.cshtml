@@ -1,0 +1,84 @@
+﻿@model IEnumerable<organisation.Models.RunthroughHiscoreVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Runthrough Hiscores</h1>
+<partial name="_CreateButtonPartial" />
+<div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceManual)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceARMManual)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceDevOpsv0_1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceDevOpsv0_2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceDevOpsTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResourceTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaskTotal)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceManual)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceARMManual)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceDevOpsv0_1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceDevOpsv0_2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceDevOpsTotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResourceTotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskTotal)
+                        </td>
+                        <td>
+                            <partial name="_ActionsButtons" model="item.Id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No runthrough hiscores exists currently.</p>
+    }
+</div>

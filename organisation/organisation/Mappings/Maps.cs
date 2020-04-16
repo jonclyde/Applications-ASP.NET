@@ -20,6 +20,7 @@ namespace organisation.Mappings
 			CreateMap<RunthroughTaskSection, RunthroughTaskSectionVM>().ReverseMap();
 			CreateMap<RunthroughTaskStatus, RunthroughTaskStatusVM>().ReverseMap();
 			CreateMap<RunthroughTaskType, RunthroughTaskTypeVM>().ReverseMap();
+			CreateMap<RunthroughHiscore, RunthroughHiscoreVM>().ReverseMap();
 		}
 	}
 }
