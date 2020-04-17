@@ -23,6 +23,11 @@ namespace AzureList.Areas.Admin.Controllers
         public ResourceTypeController(ApplicationDbContext db)
         {
             _db = db;
+            ResourceTypeVM = new ResourceTypeViewModel()
+            {
+                ResourceCategory = _db.ResourceCategory,
+                ResourceType = new Models.ResourceType()
+            };
         }
 
         //GET INDEX

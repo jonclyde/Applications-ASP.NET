@@ -42,6 +42,7 @@ namespace organisation
 			services.AddScoped<IRunthroughTaskType, RunthroughTaskTypeRepository>();
 			services.AddScoped<IRunthroughHiscore, RunthroughHiscoreRepository>();
 			services.AddScoped<ICodeCountRepository, CodeCountRepository>();
+			services.AddScoped<IRunthroughTask, RunthroughTaskRepository>();
 			services.AddAutoMapper(typeof(Maps));
 			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();

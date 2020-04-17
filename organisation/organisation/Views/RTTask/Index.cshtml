@@ -1,0 +1,89 @@
+﻿@model AdminRunthroughTaskVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Runthrough Tasks</h1>
+<div>
+    <partial name="_CreateButtonPartial" />
+    @if (Model.RTTasks.Count() > 0)
+    {
+    <div class="row">
+        <div class="col-md-2">
+            <div class="info-box">
+                <span class="info-box-icon bg-info"><i class="fa fa-list"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">@Model.TotalTasks</span>
+                    <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalTasks)</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="info-box bg-info">
+                <partial name="_CreateButtonPartial" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <hr />
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Section
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RTTasks)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RTTaskSection.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RTTaskStatus.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RTTaskType.Name)
+                    </td>
+                    <td>
+                        <partial name="_ActionsButtons" model="item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    }
+    else
+    {
+        <p>No runthrough tasks currently exist.</p>
+    }
+</div>

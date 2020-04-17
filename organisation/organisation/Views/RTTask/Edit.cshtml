@@ -1,0 +1,42 @@
+﻿@model organisation.Models.CreateRunthroughTaskVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Runthrough Task</h1>
+
+<hr />
+<form asp-action="Edit">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <input asp-for="Id" type="hidden" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RTTaskSectionId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.RTTaskSectionId, new SelectList(Model.RTTaskSections, "Value", "Text"), "Select Task Type", new { @class = "form-control" })
+                <span asp-validation-for="RTTaskSectionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RTTaskStatusId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.RTTaskStatusId, new SelectList(Model.RTTaskStatuses, "Value", "Text"), "Select Task Type", new { @class = "form-control" })
+                <span asp-validation-for="RTTaskStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RTTaskTypeId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.RTTaskTypeId, new SelectList(Model.RTTaskTypes, "Value", "Text"), "Select Task Type", new { @class = "form-control" })
+                <span asp-validation-for="RTTaskTypeId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-5">
+            <partial name="_EditAndBackToListButton" model="@Model.Id"/>
+        </div>
+    </div>
+</form>

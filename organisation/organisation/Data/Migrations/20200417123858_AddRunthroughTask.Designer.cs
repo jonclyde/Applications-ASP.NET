@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using organisation.Data;
 
 namespace organisation.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200417123858_AddRunthroughTask")]
+    partial class AddRunthroughTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -374,16 +376,13 @@ namespace organisation.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderNumber")
+                    b.Property<int?>("RTTaskSectionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RTTaskSectionId")
+                    b.Property<int?>("RTTaskStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RTTaskStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RTTaskTypeId")
+                    b.Property<int?>("RTTaskTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -541,21 +540,15 @@ namespace organisation.Data.Migrations
                 {
                     b.HasOne("organisation.Data.RunthroughTaskSection", "RTTaskSection")
                         .WithMany()
-                        .HasForeignKey("RTTaskSectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RTTaskSectionId");
 
                     b.HasOne("organisation.Data.RunthroughTaskStatus", "RTTaskStatus")
                         .WithMany()
-                        .HasForeignKey("RTTaskStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RTTaskStatusId");
 
                     b.HasOne("organisation.Data.RunthroughTaskType", "RTTaskType")
                         .WithMany()
-                        .HasForeignKey("RTTaskTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RTTaskTypeId");
                 });
 #pragma warning restore 612, 618
         }
