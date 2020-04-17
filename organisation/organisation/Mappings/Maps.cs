@@ -21,6 +21,7 @@ namespace organisation.Mappings
 			CreateMap<RunthroughTaskStatus, RunthroughTaskStatusVM>().ReverseMap();
 			CreateMap<RunthroughTaskType, RunthroughTaskTypeVM>().ReverseMap();
 			CreateMap<RunthroughHiscore, RunthroughHiscoreVM>().ReverseMap();
+			CreateMap<CodeCount, CodeCountVM>().ReverseMap();
 		}
 	}
 }

@@ -1,0 +1,53 @@
+﻿@model organisation.Models.CodeCountVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Code Count</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_Configurationv0_1" class="control-label"></label>
+                <input asp-for="IaC_Configurationv0_1" class="form-control" />
+                <span asp-validation-for="IaC_Configurationv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_ARMv0_1" class="control-label"></label>
+                <input asp-for="IaC_ARMv0_1" class="form-control" />
+                <span asp-validation-for="IaC_ARMv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_ARMv0_2" class="control-label"></label>
+                <input asp-for="IaC_ARMv0_2" class="form-control" />
+                <span asp-validation-for="IaC_ARMv0_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_Terraformv0_1" class="control-label"></label>
+                <input asp-for="IaC_Terraformv0_1" class="form-control" />
+                <span asp-validation-for="IaC_Terraformv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apps_ASP_NET" class="control-label"></label>
+                <input asp-for="Apps_ASP_NET" class="form-control" />
+                <span asp-validation-for="Apps_ASP_NET" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-5 offset-2">
+                    <partial name="_CreateAndBackToListButton" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

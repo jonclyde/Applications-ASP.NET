@@ -1,0 +1,45 @@
+﻿@model organisation.Models.CodeCountVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Code Count</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Date" />
+            <div class="form-group">
+                <label asp-for="IaC_Configurationv0_1" class="control-label"></label>
+                <input asp-for="IaC_Configurationv0_1" class="form-control" />
+                <span asp-validation-for="IaC_Configurationv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_ARMv0_1" class="control-label"></label>
+                <input asp-for="IaC_ARMv0_1" class="form-control" />
+                <span asp-validation-for="IaC_ARMv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_ARMv0_2" class="control-label"></label>
+                <input asp-for="IaC_ARMv0_2" class="form-control" />
+                <span asp-validation-for="IaC_ARMv0_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IaC_Terraformv0_1" class="control-label"></label>
+                <input asp-for="IaC_Terraformv0_1" class="form-control" />
+                <span asp-validation-for="IaC_Terraformv0_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apps_ASP_NET" class="control-label"></label>
+                <input asp-for="Apps_ASP_NET" class="form-control" />
+                <span asp-validation-for="Apps_ASP_NET" class="text-danger"></span>
+            </div>
+            <partial name="_EditAndBackToListButton" model="@Model.Id" />
+        </form>
+    </div>
+</div>
+
