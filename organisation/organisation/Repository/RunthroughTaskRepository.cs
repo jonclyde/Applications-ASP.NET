@@ -52,15 +52,17 @@ namespace organisation.Repository
 
 		public async Task<int> GetNewOrderNumber()
 		{
-			var lastRTTask = await _db.RunthroughTask
-				.OrderByDescending(q => q.OrderNumber)
-				.FirstAsync();
+			var checkAny = await _db.RunthroughTask.AnyAsync();
 
 			var newOrderNumber = 1;
-
-			if(lastRTTask == null)
+			
+			if(checkAny)
 			{
-				newOrderNumber = lastRTTask.OrderNumber;
+				var lastRTTask = await _db.RunthroughTask
+					.OrderByDescending(q => q.OrderNumber)
+					.FirstAsync();
+
+				newOrderNumber = lastRTTask.OrderNumber + 1;
 			}
 
 			return newOrderNumber;

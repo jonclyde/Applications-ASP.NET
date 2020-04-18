@@ -109,7 +109,8 @@ namespace organisation.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+
+                if (!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Model state is not valid");
                     return View(model);
@@ -118,7 +119,7 @@ namespace organisation.Controllers
 
                 var rtTaskModel = new RunthroughTaskVM
                 {
-                    OrderNumber = 100000,
+                    OrderNumber = newOrderNumber,
                     Name = model.Name,
                     RTTaskSectionId = model.RTTaskSectionId,
                     RTTaskStatusId = model.RTTaskStatusId,
@@ -197,20 +198,14 @@ namespace organisation.Controllers
                     return View(model);
                 }
 
-                var newOrderNumber = await _rtTaskRepo.GetNewOrderNumber();
+                var rtTask = await _rtTaskRepo.FindById(model.Id);
+                rtTask.OrderNumber = model.OrderNumber;
+                rtTask.Name = model.Name;
+                rtTask.RTTaskSectionId = model.RTTaskSectionId;
+                rtTask.RTTaskStatusId = model.RTTaskStatusId;
+                rtTask.RTTaskTypeId = model.RTTaskTypeId;
 
-                var rtTaskModel = new RunthroughTaskVM
-                {
-                    Id = model.Id,
-                    OrderNumber = 1000000,
-                    Name = model.Name,
-                    RTTaskSectionId = model.RTTaskSectionId,
-                    RTTaskStatusId = model.RTTaskStatusId,
-                    RTTaskTypeId = model.RTTaskTypeId
-
-                };
-
-                var rtTask = _mapper.Map<RunthroughTask>(rtTaskModel);
+                //var rtTask = _mapper.Map<RunthroughTask>(model);
                 var isSuccess = await _rtTaskRepo.Update(rtTask);
 
                 if (!isSuccess)

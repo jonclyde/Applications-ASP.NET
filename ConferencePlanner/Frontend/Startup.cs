@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Frontend.Services;
 using FrontEnd.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,9 @@ namespace Frontend
 			{
 				client.BaseAddress = new Uri(Configuration["serviceUrl"]);
 			});
+
+			services.AddSingleton<IAdminService, AdminService>();
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +42,7 @@ namespace Frontend
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+
 			}
 			else
 			{
@@ -51,6 +56,7 @@ namespace Frontend
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

@@ -31,6 +31,7 @@ namespace organisation.Models
 	public class CreateRunthroughTaskVM
 	{
 		public int Id { get; set; }
+		public int OrderNumber { get; set; }
 		public string Name { get; set; }
 
 		public IEnumerable<SelectListItem> RTTaskSections { get; set; }
