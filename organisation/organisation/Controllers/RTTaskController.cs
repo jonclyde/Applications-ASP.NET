@@ -242,6 +242,29 @@ namespace organisation.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        
+        // GET: RTTask/MoveDownOrder/5
+        public async Task<ActionResult> MoveDownOrder(int id)
+        {
+            var rtTask = await _rtTaskRepo.FindById(id);
+
+            var currentOrderNumber = rtTask.OrderNumber;
+
+            await _rtTaskRepo.MoveDownOrder(currentOrderNumber);
+
+            return RedirectToAction(nameof(Index));
+        }
+        // GET: RTTask/MoveUpOrder/5
+        public async Task<ActionResult> MoveUpOrder(int id)
+        {
+            var rtTask = await _rtTaskRepo.FindById(id);
+
+            var currentOrderNumber = rtTask.OrderNumber;
+
+            await _rtTaskRepo.MoveUpOrder(currentOrderNumber);
+
+            return RedirectToAction(nameof(Index));
+        }
 
         // POST: RTTask/Delete/5
         [HttpPost]

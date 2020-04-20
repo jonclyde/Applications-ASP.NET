@@ -53,46 +53,90 @@ scratch. This page gets rid of all links and provides the needed markup only.
     with font-awesome or any other icon font library -->
                         @*@if (SignInManager.IsSignedIn(User))
         {*@
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="OrgTasks" asp-action="Index" class="nav-link">
-                                <i class="nav-icon fas fa-list"></i>
+                        @* Personal menu *@
+
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="fas fa-chart-line"></i>
                                 <p>
-                                    Tasks
+                                    Personal
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="OrgTasks" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-list"></i>
+                                        <p>
+                                            Tasks
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="OrgGoals" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-bullseye"></i>
+                                        <p>
+                                            Goals
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="" asp-action="" class="nav-link">
+                                        <i class="nav-icon fas fa-book-open"></i>
+                                        <p>
+                                            Milestones
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="" asp-action="" class="nav-link">
+                                        <i class="nav-icon fas fa-book-open"></i>
+                                        <p>
+                                            Plans
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="" asp-action="" class="nav-link">
+                                        <i class="nav-icon fas fa-book-open"></i>
+                                        <p>
+                                            Routines
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="OrgGoals" asp-action="Index" class="nav-link">
-                                <i class="nav-icon fas fa-bullseye"></i>
+
+                        @* List menu *@
+
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="fas fa-chart-line"></i>
                                 <p>
-                                    Goals
+                                    Lists
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="OrgTasks" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-list"></i>
+                                        <p>
+                                            Shopping List
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="OrgGoals" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-bullseye"></i>
+                                        <p>
+                                            Ideas List
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                <i class="nav-icon fas fa-book-open"></i>
-                                <p>
-                                    Milestones
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                <i class="nav-icon fas fa-book-open"></i>
-                                <p>
-                                    Plans
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                <i class="nav-icon fas fa-book-open"></i>
-                                <p>
-                                    Routines
-                                </p>
-                            </a>
-                        </li>
+
                         @* Learning menu *@
 
                         <li class="nav-item has-treeview menu-open">

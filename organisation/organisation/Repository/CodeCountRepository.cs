@@ -42,6 +42,14 @@ namespace organisation.Repository
 			return codeCount;
 		}
 
+		public async Task<CodeCount> GetLastCodeCountByDate()
+		{
+			var lastRTask = await _db.CodeCounts.OrderByDescending(q => q.Date)
+				.FirstOrDefaultAsync();
+
+			return lastRTask;
+		}
+
 		public async Task<bool> isExists(int id)
 		{
 			var codeCount = await _db.CodeCounts.AnyAsync(q => q.Id == id);

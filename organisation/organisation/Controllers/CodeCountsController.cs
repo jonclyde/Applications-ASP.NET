@@ -51,7 +51,18 @@ namespace organisation.Controllers
         // GET: CodeCount/Create
         public async Task<ActionResult> Create()
         {
-            return View();
+            var lastCodeCount = await _codeCountRepo.GetLastCodeCountByDate();
+            
+            if(lastCodeCount == null)
+            {
+                return View();
+            }
+
+            var model = _mapper.Map<CodeCountVM>(lastCodeCount);
+
+            model.Date = model.Date.AddDays(1);
+
+            return View(model);
         }
 
         // POST: CodeCount/Create

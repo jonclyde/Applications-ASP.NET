@@ -8,5 +8,6 @@ namespace organisation.Contracts
 {
 	public interface ICodeCountRepository : IRepositoryBase<CodeCount>
 	{
+		Task<CodeCount> GetLastCodeCountByDate();
 	}
 }

@@ -74,14 +74,44 @@ namespace organisation.Repository
 			return rtTask;
 		}
 
-		public Task<ICollection<RunthroughTask>> MoveDownOrder(int id)
+		public async Task<bool> MoveDownOrder(int currentOrderNumber)
 		{
-			throw new NotImplementedException();
+			var rtTask = await _db.RunthroughTask
+				.FirstAsync(q => q.OrderNumber == currentOrderNumber);
+			var rtTaskToSwitch = await _db.RunthroughTask
+				.OrderBy(q => q.OrderNumber)
+				.FirstAsync(q => q.OrderNumber > currentOrderNumber);
+
+			var newOrderNumber = rtTaskToSwitch.OrderNumber;
+
+			rtTask.OrderNumber = newOrderNumber;
+			rtTaskToSwitch.OrderNumber = currentOrderNumber;
+
+			//Update existing
+			_db.RunthroughTask.Update(rtTask);
+			_db.RunthroughTask.Update(rtTaskToSwitch);
+
+			return await Save();
 		}
 
-		public Task<ICollection<RunthroughTask>> MoveUpOrder(int id)
+		public async Task<bool> MoveUpOrder(int currentOrderNumber)
 		{
-			throw new NotImplementedException();
+			var rtTask = await _db.RunthroughTask
+				.FirstAsync(q => q.OrderNumber == currentOrderNumber);
+			var rtTaskToSwitch = await _db.RunthroughTask
+				.OrderByDescending(q => q.OrderNumber)
+				.FirstAsync(q => q.OrderNumber < currentOrderNumber);
+
+			var newOrderNumber = rtTaskToSwitch.OrderNumber;
+
+			rtTask.OrderNumber = newOrderNumber;
+			rtTaskToSwitch.OrderNumber = currentOrderNumber;
+
+			//Update existing
+			_db.RunthroughTask.Update(rtTask);
+			_db.RunthroughTask.Update(rtTaskToSwitch);
+
+			return await Save();
 		}
 
 		public Task<ICollection<RunthroughTask>> ReorderList(int id)
