@@ -12,6 +12,10 @@ using Azure_List.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Azure_List.Contracts;
+using Azure_List.Repository;
+using AutoMapper;
+using Azure_List.Mappings;
 
 namespace Azure_List
 {
@@ -30,7 +34,9 @@ namespace Azure_List
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+			services.AddScoped<IAzVnetRepository, azVnetRepository>();
+			services.AddAutoMapper(typeof(Maps));
+			services.AddDefaultIdentity<IdentityUser>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();

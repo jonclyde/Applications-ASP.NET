@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AzVnetVM>
+
+@{
+        ViewData["Title"] = "Index";
+    }
+
+<h1>Azure Virtual Networks</h1>
+<div>
+    <div class="col-md-2">
+        <div class="info-box bg-info">
+            <partial name="_CreateButtonPartial" />
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Resource Group
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Address Space
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.resourceGroup)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.addressSpace)
+                        </td>
+                        <td>
+                            <partial name="_ActionsButtons" model="item.Id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>No Azure Virtual Networks currently exist.</p>
+    }
+</div>
