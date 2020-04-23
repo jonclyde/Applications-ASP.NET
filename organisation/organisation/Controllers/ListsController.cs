@@ -3,48 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Azure_List.Contracts;
-using Azure_List.Data;
-using Azure_List.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using organisation.Contracts;
 
-namespace Azure_List.Controllers
+namespace organisation.Controllers
 {
-    public class AzVnetController : Controller
+    public class ListsController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        private readonly IAzVnetRepository _azVnetRepo;
         private readonly IMapper _mapper;
+        private readonly IListRepository _listRepo;
 
-        public AzVnetController(ApplicationDbContext db, IAzVnetRepository azVnetRepo, IMapper mapper)
+        public ListsController(IMapper mapper, IListRepository listRepository)
         {
-            _db = db;
-            _azVnetRepo = azVnetRepo;
+            _listRepo = listRepository;
             _mapper = mapper;
         }
 
-        // GET: AzVnet
-        public async Task<ActionResult> Index()
+        // GET: Lists
+        public ActionResult Index()
         {
-            var azVnets = await _azVnetRepo.FindAll();
-            var model = _mapper.Map<List<AzVnetVM>>(azVnets);
-            return View(model);
+            return View();
         }
 
-        // GET: AzVnet/Details/5
+        // GET: Lists/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AzVnet/Create
+        // GET: Lists/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AzVnet/Create
+        // POST: Lists/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -61,13 +55,13 @@ namespace Azure_List.Controllers
             }
         }
 
-        // GET: AzVnet/Edit/5
+        // GET: Lists/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AzVnet/Edit/5
+        // POST: Lists/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -84,13 +78,13 @@ namespace Azure_List.Controllers
             }
         }
 
-        // GET: AzVnet/Delete/5
+        // GET: Lists/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AzVnet/Delete/5
+        // POST: Lists/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

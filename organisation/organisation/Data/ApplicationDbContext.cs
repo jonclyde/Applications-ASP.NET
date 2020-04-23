@@ -23,5 +23,6 @@ namespace organisation.Data
 		public DbSet<RunthroughHiscore> RunthroughHiscores { get; set; }
 		public DbSet<CodeCount> CodeCounts { get; set; }
 		public DbSet<RunthroughTask> RunthroughTask { get; set; }
+		public DbSet<List> Lists { get; set; }
 	}
 }
