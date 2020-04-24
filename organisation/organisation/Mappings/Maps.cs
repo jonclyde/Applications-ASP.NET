@@ -25,6 +25,7 @@ namespace organisation.Mappings
 			CreateMap<RunthroughTask, RunthroughTaskVM>().ReverseMap();
 			CreateMap<RunthroughTask, AdminRunthroughTaskVM>().ReverseMap();
 			CreateMap<RunthroughTask, CreateRunthroughTaskVM>().ReverseMap();
+			CreateMap<List, ListVM>().ReverseMap();
 		}
 	}
 }

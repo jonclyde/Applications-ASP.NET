@@ -6,6 +6,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using organisation.Contracts;
+using organisation.Data;
+using organisation.Models;
 
 namespace organisation.Controllers
 {
@@ -21,9 +23,13 @@ namespace organisation.Controllers
         }
 
         // GET: Lists
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var lists = await _listRepo.FindAll();
+
+            var model = _mapper.Map<List<List>, List<ListVM>>(lists.ToList());
+
+            return View(model);
         }
 
         // GET: Lists/Details/5
@@ -41,12 +47,26 @@ namespace organisation.Controllers
         // POST: Lists/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(ListVM model)
         {
             try
             {
                 // TODO: Add insert logic here
+                if(!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("", "Model state is not valid");
+                    return View(model);
+                }
 
+                var list = _mapper.Map<List>(model);
+
+                var isSuccess = await _listRepo.Create(list);
+
+                if(!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went wrong adding the db record");
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
