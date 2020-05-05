@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoviesAPI.Entities
+namespace MoviesAPI.DTOs
 {
-	public class Genre
+	public class GenreCreationDTO
 	{
-		[Key]
-		public int Id { get; set; }
 		[Required]
 		[StringLength(40)]
 		[FirstLetterUppercase]
