@@ -1,5 +1,6 @@
 ﻿using BookStore_API.Contracts;
 using BookStore_API.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +10,52 @@ namespace BookStore_API.Services
 {
 	public class BookRepository : IBookRepository
 	{
-		public Task<bool> Create(Book entity)
+		private readonly ApplicationDbContext _db;
+
+		public BookRepository(ApplicationDbContext db)
 		{
-			throw new NotImplementedException();
+			_db = db;
 		}
 
-		public Task<bool> Delete(Book entity)
+		public async Task<bool> Create(Book entity)
 		{
-			throw new NotImplementedException();
+			await _db.Books.AddAsync(entity);
+			return await Save();
 		}
 
-		public Task<IList<Book>> FindAll()
+		public async Task<bool> Delete(Book entity)
 		{
-			throw new NotImplementedException();
+			_db.Books.Remove(entity);
+			return await Save();
 		}
 
-		public Task<Book> FindById(int id)
+		public async Task<IList<Book>> FindAll()
 		{
-			throw new NotImplementedException();
+			var authors = await _db.Books.ToListAsync();
+			return authors;
 		}
 
-		public Task<bool> Save()
+		public async Task<Book> FindById(int id)
 		{
-			throw new NotImplementedException();
+			var author = await _db.Books.FindAsync(id);
+			return author;
 		}
 
-		public Task<bool> Update(Book entity)
+		public async Task<bool> isExists(int id)
 		{
-			throw new NotImplementedException();
+			return await _db.Books.AnyAsync(q => q.Id == id);
+		}
+
+		public async Task<bool> Save()
+		{
+			var changes = await _db.SaveChangesAsync();
+			return changes > 0;
+		}
+
+		public async Task<bool> Update(Book entity)
+		{
+			_db.Books.Update(entity);
+			return await Save();
 		}
 	}
 }

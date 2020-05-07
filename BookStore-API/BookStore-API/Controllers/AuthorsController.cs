@@ -97,19 +97,19 @@ namespace BookStore_API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
         {
+            var location = GetControllerActionNames();
             try
             {
-
-                _logger.LogInfo($"Author submission attempted");
+                _logger.LogInfo($"{location}: Create Attempted");
                 if (authorDTO == null)
                 {
-                    _logger.LogWarn($"Empty request was submitted");
+                    _logger.LogWarn($"{location}: Empty request was submitted");
                     return BadRequest(ModelState);
                 }
 
                 if(!ModelState.IsValid)
                 {
-                    _logger.LogWarn($"Author data was incomplete");
+                    _logger.LogWarn($"{location}: Data was incomplete");
                     return BadRequest(ModelState);
                 }
                 var author = _mapper.Map<Author>(authorDTO);
@@ -118,9 +118,10 @@ namespace BookStore_API.Controllers
 
                 if(!isSuccess)
                 {
-                    return InternalError($"Author creation failed");
+                    return InternalError($"{location}: Creation failed");
                 }
                 _logger.LogInfo("Author created");
+                _logger.LogInfo($"{location}: {author}");
                 return Created("Create", new { author });
 
             }
@@ -212,6 +213,8 @@ namespace BookStore_API.Controllers
                     return NotFound();
                 }
 
+                var author = await _authorRepository.FindById(id);
+
                 var isSuccess = await _authorRepository.Delete(author);
 
                 if (!isSuccess)
@@ -227,6 +230,14 @@ namespace BookStore_API.Controllers
 
                 return InternalError($"{ex.Message} - {ex.InnerException}");
             }
+        }
+
+        private string GetControllerActionNames()
+        {
+            var controller = ControllerContext.ActionDescriptor.ControllerName;
+            var action = ControllerContext.ActionDescriptor.ActionName;
+
+            return $"{controller} - {action}";
         }
 
         private ObjectResult InternalError(string message)
