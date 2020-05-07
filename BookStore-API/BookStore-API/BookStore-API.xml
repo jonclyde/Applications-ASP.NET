@@ -56,12 +56,26 @@
             <param name="id"></param>
             <returns>A book</returns>
         </member>
+        <member name="M:BookStore_API.Controllers.BooksController.Update(System.Int32,BookStore_API.DTOs.BookUpdateDTO)">
+            <summary>
+            Create a book
+            </summary>
+            <param name="bookDTO"></param>
+            <returns>book object</returns>
+        </member>
         <member name="M:BookStore_API.Controllers.BooksController.Create(BookStore_API.DTOs.BookCreateDTO)">
             <summary>
             Create a book
             </summary>
             <param name="bookDTO"></param>
             <returns>book object</returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.Delete(System.Int32)">
+            <summary>
+            Removes an author by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:BookStore_API.Controllers.HomeController">
             <summary>

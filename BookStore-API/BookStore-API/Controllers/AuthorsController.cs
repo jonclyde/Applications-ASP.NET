@@ -221,7 +221,7 @@ namespace BookStore_API.Controllers
                 {
                     return InternalError($"Author delete failed");
                 }
-                _logger.LogWarn($"Author with id: {id} deleted");
+                _logger.LogInfo($"Author with id: {id} deleted");
                 return NoContent();
 
             }

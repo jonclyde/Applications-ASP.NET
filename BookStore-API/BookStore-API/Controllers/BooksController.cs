@@ -85,6 +85,56 @@ namespace BookStore_API.Controllers
         /// </summary>
         /// <param name="bookDTO"></param>
         /// <returns>book object</returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] BookUpdateDTO bookDTO)
+        {
+            var location = GetControllerActionNames();
+
+            try
+            {
+                _logger.LogInfo($"{location}: Update attempted on record with id: {id}");
+                if(id < 1 || bookDTO == null || id != bookDTO.Id)
+                {
+                    _logger.LogWarn($"{location}: Update failed with bad data - id: {id}");
+                    return BadRequest();
+                }
+
+                var isExists = await _bookRepository.isExists(id);
+
+                if(!isExists)
+                {
+                    _logger.LogWarn($"{location}: Failed to retrieve record with id: {id}");
+                    return NotFound();
+                }
+                if(!ModelState.IsValid)
+                {
+                    _logger.LogWarn($"{location}: Data was incomplete");
+                    return BadRequest(ModelState);
+                }
+
+                var book = _mapper.Map<Book>(bookDTO);
+                var isSuccess = await _bookRepository.Update(book);
+
+                if(!isSuccess)
+                {
+                    return InternalError($"{location}: Update failed for record with id: {id}");
+                }
+                _logger.LogInfo($"{location}: Record with id: {id} successfully updated");
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return InternalError($"{location}: {ex.Message} - {ex.InnerException}");
+            }
+        }
+        /// <summary>
+        /// Create a book
+        /// </summary>
+        /// <param name="bookDTO"></param>
+        /// <returns>book object</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,10 +167,58 @@ namespace BookStore_API.Controllers
                 _logger.LogInfo($"{location}: {book}");
                 return Created("Create", new { book });
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+                return InternalError($"{location}: {ex.Message} - {ex.InnerException}");
+            }
+        }
+
+        /// <summary>
+        /// Removes an author by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                _logger.LogInfo($"Book delete attempted - id: {id}");
+                if (id < 1)
+                {
+                    _logger.LogWarn($"Book delete failed with bad data");
+                    return BadRequest();
+                }
+
+
+                var isExists = await _bookRepository.isExists(id);
+
+                if (!isExists)
+                {
+                    _logger.LogWarn($"Book with id:{id} was not found");
+                    return NotFound();
+                }
+
+                var book = await _bookRepository.FindById(id);
+
+                var isSuccess = await _bookRepository.Delete(book);
+
+                if (!isSuccess)
+                {
+                    return InternalError($"Book delete failed");
+                }
+                _logger.LogWarn($"Book with id: {id} deleted");
+                return NoContent();
+
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                return InternalError($"{ex.Message} - {ex.InnerException}");
             }
         }
 
