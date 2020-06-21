@@ -52,6 +52,29 @@
       "metadata": {
         "description": "Location of Application Insight."
       }
+    },
+    "SQLType": {
+      "type": "string",
+      "allowedValues": [
+        "IaaS",
+        "PaaS"
+      ]
+    },
+    "PaaSdatabaseServerName": {
+      "type": "string"
+    },
+    "PaaSdatabaseUsername": {
+      "type": "string"
+    },
+    "PaaSdatabasePassword": {
+      "type": "securestring"
+    },
+    "PaaSdatabaseName": {
+      "type": "string"
+    },
+    "PaaSdatabaseEdition": {
+      "type": "string",
+      "defaultValue": "Basic"
     }
   },
   "variables": {
@@ -254,6 +277,46 @@
               "commandToExecute": "[concat('powershell.exe setx /m APPINSIGHTS_INSTRUMENTATIONKEY ', reference(resourceId('microsoft.insights/components/', parameters('vmName')), '2015-05-01').InstrumentationKey, '; Import-Module servermanager; Add-WindowsFeature Web-Server; Invoke-WebRequest https://download.microsoft.com/download/0/1/D/01DC28EA-638C-4A22-A57B-4CEF97755C6C/WebDeploy_amd64_en-US.msi -outfile $env:temp\\WebDeploy_amd64_en-US.msi;  Start-Process $env:temp\\WebDeploy_amd64_en-US.msi -ArgumentList \"/quiet\" -Wait;  Invoke-WebRequest https://download.visualstudio.microsoft.com/download/pr/7c30d3a1-f519-4167-b850-b9c49bf2aa0e/dbfa957a76a41a1e1795f59d400d4ccd/dotnet-hosting-3.1.5-win.exe -outfile $env:temp\\dotnet-hosting-3.1.5-win.exe;  Start-Process $env:temp\\dotnet-hosting-3.1.5-win.exe -ArgumentList \"/quiet\" -Wait;  net stop was /y;  net start w3svc')]"
             }
           }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers",
+      "name": "[parameters('PaaSdatabaseServerName')]",
+      "apiVersion": "2014-04-01-preview",
+      "location": "[parameters('location')]",
+      "condition": "[equals(parameters('SQLType'),'PaaS')]",
+      "properties": {
+        "administratorLogin": "[parameters('PaaSdatabaseUsername')]",
+        "administratorLoginPassword": "[parameters('PaaSdatabasePassword')]",
+        "version": "12.0"
+      },
+      "resources": [
+        {
+          "type": "databases",
+          "name": "[parameters('PaaSdatabaseName')]",
+          "apiVersion": "2014-04-01-preview",
+          "location": "[parameters('location')]",
+          "properties": {
+            "edition": "[parameters('PaaSdatabaseEdition')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS"
+          },
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', parameters('PaaSdatabaseServerName'))]"
+          ]
+        },
+        {
+          "type": "firewallrules",
+          "name": "AllowAllWindowsAzureIps",
+          "apiVersion": "2014-04-01-preview",
+          "location": "[parameters('location')]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          },
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', parameters('PaaSdatabaseServerName'))]"
+          ]
         }
       ]
     }
