@@ -34,6 +34,7 @@ namespace _3D_Printing_Service
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
+			services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 			services.AddIdentity<IdentityUser,IdentityRole>()
 				.AddDefaultTokenProviders()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
