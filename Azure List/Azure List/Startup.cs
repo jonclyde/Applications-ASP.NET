@@ -34,6 +34,7 @@ namespace Azure_List
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
+			services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 			services.AddScoped<IAzVnetRepository, azVnetRepository>();
 			services.AddAutoMapper(typeof(Maps));
 			services.AddDefaultIdentity<IdentityUser>()
