@@ -76,7 +76,7 @@
     "databaseName": {
       "type": "string"
     },
-        "dataDisks": {
+        "SQLdataDisks": {
             "type": "array"
         },
         "dataDiskResources": {
@@ -395,18 +395,18 @@
                     "copy": [
                         {
                             "name": "dataDisks",
-                            "count": "[length(parameters('dataDisks'))]",
+                            "count": "[length(parameters('SQLdataDisks'))]",
                             "input": {
-                                "lun": "[parameters('dataDisks')[copyIndex('dataDisks')].lun]",
-                                "createOption": "[parameters('dataDisks')[copyIndex('dataDisks')].createOption]",
-                                "caching": "[parameters('dataDisks')[copyIndex('dataDisks')].caching]",
-                                "writeAcceleratorEnabled": "[parameters('dataDisks')[copyIndex('dataDisks')].writeAcceleratorEnabled]",
-                                "diskSizeGB": "[parameters('dataDisks')[copyIndex('dataDisks')].diskSizeGB]",
+                                "lun": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].lun]",
+                                "createOption": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].createOption]",
+                                "caching": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].caching]",
+                                "writeAcceleratorEnabled": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].writeAcceleratorEnabled]",
+                                "diskSizeGB": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].diskSizeGB]",
                                 "managedDisk": {
-                                    "id": "[coalesce(parameters('dataDisks')[copyIndex('dataDisks')].id, if(equals(parameters('dataDisks')[copyIndex('dataDisks')].name, json('null')), json('null'), resourceId('Microsoft.Compute/disks', parameters('dataDisks')[copyIndex('dataDisks')].name)))]",
-                                    "storageAccountType": "[parameters('dataDisks')[copyIndex('dataDisks')].storageAccountType]",
+                                    "id": "[coalesce(parameters('SQLdataDisks')[copyIndex('dataDisks')].id, if(equals(parameters('SQLdataDisks')[copyIndex('dataDisks')].name, json('null')), json('null'), resourceId('Microsoft.Compute/disks', parameters('SQLdataDisks')[copyIndex('dataDisks')].name)))]",
+                                    "storageAccountType": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].storageAccountType]",
                                     "diskEncryptionSet": {
-                                        "id": "[parameters('dataDisks')[copyIndex('dataDisks')].diskEncryptionSet.id]"
+                                        "id": "[parameters('SQLdataDisks')[copyIndex('dataDisks')].diskEncryptionSet.id]"
                                     }
                                 }
                             }
