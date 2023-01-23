@@ -4,6 +4,7 @@ using LeaveManagement2K23.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagement2K23.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230122201453_AddedDefaultUsersandRoles")]
+    partial class AddedDefaultUsersandRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,43 +107,39 @@ namespace LeaveManagement2K23.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
+                            Id = "016f515f-3567-4529-bfa1-da42b0e9ed1a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0eb1c18e-2b07-415b-a25b-a03a7c41a14d",
+                            ConcurrencyStamp = "121d93e5-d08e-4b23-89ad-28b1e7867ef2",
                             DataJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@test.com",
-                            EmailConfirmed = true,
+                            EmailConfirmed = false,
                             Firstname = "System",
                             Lastname = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TEST.COM",
-                            NormalizedUserName = "ADMIN@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELG0JuknuJ4XBDNn99qKF4Atoa1gCgAl6jOfJoHiKZrE3DGW2Oipqb3N8GTuKICWhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDU3iCee/ME5u3l07oozd3PGV5RV/RbJDbe5YkPnPU0kBP3yt3MJKQAfOwTiYz0mPQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7ea5b08-4b46-4cdd-8d93-3acb9c7dd0bb",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@test.com"
+                            SecurityStamp = "93116aa1-7275-449b-9cfd-61699535ef50",
+                            TwoFactorEnabled = false
                         },
                         new
                         {
-                            Id = "u1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
+                            Id = "016f515f-3567-4529-bfa1-da42b0e9ed1b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f091005-a0bf-4c46-b989-9bece42b072e",
+                            ConcurrencyStamp = "9a305f49-cfb7-448f-acc3-0fa40d84bad3",
                             DataJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@test.com",
-                            EmailConfirmed = true,
+                            EmailConfirmed = false,
                             Firstname = "System",
                             Lastname = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@TEST.COM",
-                            NormalizedUserName = "USER@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEWtqQN547iHivqYq3ZcIhJxbdT1yM6r4oWOdwOlbLrYoDctDQPuHXVOegknKxPiRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGusHe1ieSG1t4dVE0Dj+n/ZbnhANymuxrlvXi8rh3k3MTBxYdmPjrjzCyPOtBcwWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e43235ec-92fa-4c62-b5f5-f6b3e1681a1f",
-                            TwoFactorEnabled = false,
-                            UserName = "user@test.com"
+                            SecurityStamp = "93b91d45-22c3-4fdf-82dc-f61de58af2ad",
+                            TwoFactorEnabled = false
                         });
                 });
 
@@ -230,13 +229,13 @@ namespace LeaveManagement2K23.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "r120303a-bf81-4802-bd34-a90f17ac61ca",
+                            Id = "9169e2cc-9228-4d8f-b89c-0ca78e26ce18",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "r220303a-bf81-4802-bd34-a90f17ac61ca",
+                            Id = "9100d999-9b07-4670-993c-67eb83cbdccc",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -333,13 +332,13 @@ namespace LeaveManagement2K23.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
-                            RoleId = "r120303a-bf81-4802-bd34-a90f17ac61ca"
+                            UserId = "016f515f-3567-4529-bfa1-da42b0e9ed1a",
+                            RoleId = "9169e2cc-9228-4d8f-b89c-0ca78e26ce18"
                         },
                         new
                         {
-                            UserId = "u1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
-                            RoleId = "r220303a-bf81-4802-bd34-a90f17ac61ca"
+                            UserId = "016f515f-3567-4529-bfa1-da42b0e9ed1b",
+                            RoleId = "9100d999-9b07-4670-993c-67eb83cbdccc"
                         });
                 });
 
