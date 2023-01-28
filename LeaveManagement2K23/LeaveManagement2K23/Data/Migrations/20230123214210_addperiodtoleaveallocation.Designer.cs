@@ -4,6 +4,7 @@ using LeaveManagement2K23.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagement2K23.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230123214210_addperiodtoleaveallocation")]
+    partial class addperiodtoleaveallocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +109,7 @@ namespace LeaveManagement2K23.Data.Migrations
                         {
                             Id = "a1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e9b6fd2-ec48-4ebd-8f6b-88afd2155dde",
+                            ConcurrencyStamp = "915c2592-291a-40eb-b7cd-8197fac675cc",
                             DataJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@test.com",
@@ -116,9 +119,9 @@ namespace LeaveManagement2K23.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TEST.COM",
                             NormalizedUserName = "ADMIN@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECDGNhHuf07HKOdnjfR6ufC+yEasJtqaBXxVsONY4vcF3yO8kq0d+Sa5FxR8lRSqNg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ/PAEg+LaKyli7n4xuFeCj6eHUSV+9nI0MsVuqek6dKiTpBibl/7f95bwpOAPIibw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b2f0744c-f374-421e-9417-68d6c89b0654",
+                            SecurityStamp = "4adeddc5-126a-4359-90fb-e8901ce7c290",
                             TwoFactorEnabled = false,
                             UserName = "admin@test.com"
                         },
@@ -126,7 +129,7 @@ namespace LeaveManagement2K23.Data.Migrations
                         {
                             Id = "u1e4d073-2b6a-4ad1-9fb2-3ab393b62f46",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2a51899-de39-4440-a3fa-d22844909058",
+                            ConcurrencyStamp = "f00d76db-a886-4981-a19c-ba0302195b94",
                             DataJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@test.com",
@@ -136,9 +139,9 @@ namespace LeaveManagement2K23.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@TEST.COM",
                             NormalizedUserName = "USER@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMDYV8zM+TsXD2l3vFIEBoufbR3ItLFBSpjkKEMVko6TGDrGEuuQb7NfHe2sCGD7eQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAi7jWZJtu2orf9zV/3RNR2K6M79j81IYJjs0eSba49R4aFwq82qztjqJdM1MC7ltg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb1fa5d0-0bfb-44d7-a5ad-441a44612270",
+                            SecurityStamp = "9d147b64-2acc-43fd-bc44-cf07d9439495",
                             TwoFactorEnabled = false,
                             UserName = "user@test.com"
                         });
