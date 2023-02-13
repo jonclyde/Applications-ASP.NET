@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LeaveManagement.Common.Constants;
+using LeaveManagement.Application.Contracts;
+using LeaveManagement.Data;
+using LeaveManagement.Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LeaveManagement2K23.Data;
-using LeaveManagement2K23.Models;
-using AutoMapper;
-using LeaveManagement2K23.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using LeaveManagement2K23.Constants;
 
 namespace LeaveManagement2K23.Controllers
 {
@@ -19,11 +14,13 @@ namespace LeaveManagement2K23.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILeaveRequestRepository leaveRequestRepository;
+        private readonly ILogger<LeaveRequestsController> logger;
 
-        public LeaveRequestsController(ApplicationDbContext context, ILeaveRequestRepository leaveRequestRepository)
+        public LeaveRequestsController(ApplicationDbContext context, ILeaveRequestRepository leaveRequestRepository, ILogger<LeaveRequestsController> logger)
         {
             _context = context;
             this.leaveRequestRepository = leaveRequestRepository;
+            this.logger = logger;
         }
 
         [Authorize(Roles = Roles.Administrator)]
@@ -61,6 +58,7 @@ namespace LeaveManagement2K23.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error approving request");
                 throw;
             }
             return RedirectToAction(nameof(Index));
@@ -75,6 +73,7 @@ namespace LeaveManagement2K23.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error cancelling request");
                 throw;
             }
             return RedirectToAction(nameof(MyLeave));
@@ -87,7 +86,7 @@ namespace LeaveManagement2K23.Controllers
             {
                 LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Name")
             };
-            
+
             return View(model);
         }
 
@@ -98,28 +97,30 @@ namespace LeaveManagement2K23.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LeaveRequestCreateVM model)
         {
-                try
+            try
+            {
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    var isValidRequest = await leaveRequestRepository.CreateLeaveRequest(model);
+                    if (isValidRequest)
                     {
-                        var isValidRequest = await leaveRequestRepository.CreateLeaveRequest(model);
-                        if (isValidRequest)
-                        {
-                            return RedirectToAction(nameof(MyLeave));
-                        }
-
-                        ModelState.AddModelError("", "Something went wrong with submitting your record");
+                        return RedirectToAction(nameof(MyLeave));
                     }
+
+                    ModelState.AddModelError("", "Something went wrong with submitting your record");
                 }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError(string.Empty, ex.Message);
-                }
-            
-                model.LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Id", model.LeaveTypeId);
-                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError(ex, "Error creating request");
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            model.LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Id", model.LeaveTypeId);
+            return View(model);
         }
-        
+
 
         // GET: LeaveRequests/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -207,14 +208,14 @@ namespace LeaveManagement2K23.Controllers
             {
                 _context.LeaveRequests.Remove(leaveRequest);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LeaveRequestExists(int id)
         {
-          return (_context.LeaveRequests?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.LeaveRequests?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

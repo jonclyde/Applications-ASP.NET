@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using LeaveManagement2K23.Constants;
-using LeaveManagement2K23.Contracts;
-using LeaveManagement2K23.Data;
-using LeaveManagement2K23.Models;
-using LeaveManagement2K23.Repositories;
+using LeaveManagement.Common.Constants;
+using LeaveManagement.Application.Contracts;
+using LeaveManagement.Data;
+using LeaveManagement.Common.Models;
+using LeaveManagement.Application.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
